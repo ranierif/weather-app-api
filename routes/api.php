@@ -15,8 +15,8 @@ use App\Http\Controllers\Api;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('auth/login', [Api\Auth\LoginController::class, 'login']);
+Route::post('auth/login', [Api\Auth\LoginController::class, 'login'])->name('api.auth.login');
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('weather/data', [Api\Weather\DataController::class, 'data']);
+    Route::get('weather/data', [Api\Weather\DataController::class, 'data'])->name('api.weather.data');
 });

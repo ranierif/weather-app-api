@@ -30,3 +30,7 @@ To start the tests, I created a user and a simple password in the seed:
 To communicate with the API, you can use **POSTMAN** (don't forget to have the project running with ```php artisan serve```). Below I will list the API methods:
 
 Go to [API Documentation (Postman)](https://documenter.getpostman.com/view/216454/UVsQrijH)
+
+## Unit Test
+
+- Run ```php artisan test``` or ```./vendor/bin/phpunit``` and see results of tests.

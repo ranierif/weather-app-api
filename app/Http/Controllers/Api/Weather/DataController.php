@@ -28,7 +28,7 @@ class DataController extends Controller
 
             if($weatherLocation['status']) {
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message' => 'Weather of ' . $location->city . ' ('.(($request->date) ? $request->date : date('Y-m-d')).') get with success.',
                     'details' => $location->getWeather($request->date),
                 ]);
