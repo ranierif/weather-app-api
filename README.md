@@ -18,6 +18,12 @@ This is a CRUD API for Weather Forecast Model build in Laravel 8.75. In this pro
 - Run ``` php artisan passport:install ```
 - And start running the project ``` php artisan serve ```
 
+## The Provider: Open Weather Map
+
+To be able to search for the weather of any date in the past, it is necessary to hire the history service in the API, as it uses [this method](https://openweathermap.org/api/history-api-timestamp). So the part of fetching the weather of a date will only work if you inform an API KEY in the .env (**OPENWEATHER_API_KEY**) that has this service contracted.
+
+To get the weather of the current day, it will work with any key, as the functionality is free.
+
 ## How use the API
 
 To use the API we need a username and password, because the API is configured to be used only for authentication performed. And for this authentication I used **Laravel Passport**.

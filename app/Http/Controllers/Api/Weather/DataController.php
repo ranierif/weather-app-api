@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Location;
+use Carbon\Carbon;
 
 class DataController extends Controller
 {
@@ -16,7 +17,7 @@ class DataController extends Controller
     {
         $rules = array(
             'city' => 'required|string|exists:locations,city',
-            'date' => 'nullable|date|date_format:Y-m-d'
+            'date' => 'nullable|date|date_format:Y-m-d|after:'.Carbon::now()->subYears(40)->format('Y-m-d')
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -39,6 +40,6 @@ class DataController extends Controller
             return response()->json(['status' => false, 'message' => 'There was an error in your request.', 'errors' => $validator->messages()], 400);
         }
 
-        return response()->json(['status' => false, 'message' => 'We did not find the weather for the given city.'], 400);
+        return response()->json(['status' => false, 'message' => 'We did not find the weather for the given location or date.'], 400);
     }
 }

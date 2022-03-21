@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Location;
+use Carbon\Carbon;
 
 class OpenWeatherService
 {
@@ -15,9 +16,14 @@ class OpenWeatherService
      * @param Location $location
      * @return array|false[]
      */
-    public function getCurrentWeatherData(Location $location){
+    public function getCurrentWeatherData(Location $location, $date = null){
 
-        $endpoint = 'https://api.openweathermap.org/data/2.5/weather?lat='.$location->lat.'&lon='.$location->lon.'&appid='.$this->api_key;
+        if($date != date('Y-m-d')){
+            $endpoint = 'https://history.openweathermap.org/data/3.0/history/timemachine?lat='.$location->lat.'&lon='.$location->lon.'&dt='.strtotime($date).'&appid='.$this->api_key;
+        }else{
+            $endpoint = 'https://api.openweathermap.org/data/2.5/weather?lat='.$location->lat.'&lon='.$location->lon.'&appid='.$this->api_key;
+        }
+
         $data = $this->execCurl($endpoint);
 
         if($data && isset($data['coord'])){

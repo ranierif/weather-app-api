@@ -37,10 +37,12 @@ class Location extends Model
         $dataWeather = $this->weather()->where('date', $date)->first();
         if(!$dataWeather){
             $weather = New Weather;
-            $data = $weather->getWeatherLocationDataFromService($this);
+            $data = $weather->getWeatherLocationDataFromService($this, $date);
             if($data['status']) {
                 event(new UpdateWeatherEvent($this, $date, $data));
                 return ['status' => true, 'details' => $data['data']];
+            }else{
+                return ['status' => false];
             }
         }
 

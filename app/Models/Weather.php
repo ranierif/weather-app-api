@@ -32,7 +32,7 @@ class Weather extends Model
 
     /**
      * @param Location $location
-     * @param $date
+     * @param null $date
      * @param $details
      */
     public function updateDate(Location $location, $date, $details){
@@ -48,11 +48,12 @@ class Weather extends Model
 
     /**
      * @param Location $location
+     * @param $date
      * @return array|false[]
      */
-    public function getWeatherLocationDataFromService(Location $location){
+    public function getWeatherLocationDataFromService(Location $location, $date = null){
         $service = New OpenWeatherService;
-        $data = $service->getCurrentWeatherData($location);
+        $data = $service->getCurrentWeatherData($location, $date);
         return $data;
     }
 

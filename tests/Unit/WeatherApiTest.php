@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use App\Models\Location;
 use App\Models\User;
-use Faker\Factory;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 class WeatherApiTest extends TestCase
 {
@@ -33,9 +33,7 @@ class WeatherApiTest extends TestCase
      */
     public function test_get_weather_with_date($city = null, $date = null)
     {
-        $faker = Factory::create();
-
-        $date = ($date) ? $date : $faker->date('Y-m-d');
+        $date = ($date) ? Carbon::parse($date)->format('Y-m-d') : Carbon::now()->format('Y-m-d');
         $city = ($city) ? $city : Location::inRandomOrder()->first()->city;
 
         $formData = [
