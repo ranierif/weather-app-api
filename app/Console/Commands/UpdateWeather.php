@@ -43,8 +43,11 @@ class UpdateWeather extends Command
         $locations = Location::get();
         foreach($locations as $location){
             $weather = New Weather;
-            $weather->updateDate($location, $date);
-            $this->info($date.': '.$location->city.' update Weather');
+            $details = $weather->getWeatherLocationDataFromService($location, $date);
+            if($details['status']) {
+                $weather->updateDate($location, $date, $details);
+                $this->info($date . ': ' . $location->city . ' update Weather');
+            }
         }
     }
 }

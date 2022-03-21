@@ -53,7 +53,7 @@ class Weather extends Model
      */
     public function getWeatherLocationDataFromService(Location $location, $date = null){
         $service = New OpenWeatherService;
-        $data = $service->getCurrentWeatherData($location, $date);
+        $data = $service->getWeatherData($location, $date);
         return $data;
     }
 
